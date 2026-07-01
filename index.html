@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🏛 Harness Bulletin Board — Inversion Labs</title>
+    <style>
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body {
+            font-family: 'JetBrains Mono', 'Fira Code', monospace;
+            background: #0a0a0f;
+            color: #e8e8ed;
+            line-height: 1.6;
+        }
+        .container { max-width: 1400px; margin: 0 auto; padding: 2rem; }
+        header {
+            border-bottom: 1px solid #2a2a3a;
+            padding-bottom: 2rem;
+            margin-bottom: 2rem;
+        }
+        h1 { 
+            font-size: 2.5rem; 
+            font-weight: 700; 
+            background: linear-gradient(135deg, #00ff88, #00d4ff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 0.5rem;
+        }
+        .subtitle { color: #888; font-size: 1.1rem; }
+        .status-bar {
+            display: flex;
+            gap: 2rem;
+            flex-wrap: wrap;
+            margin-top: 1.5rem;
+            padding: 1rem;
+            background: #12121a;
+            border-radius: 8px;
+            border: 1px solid #2a2a3a;
+        }
+        .stat { display: flex; flex-direction: column; }
+        .stat-value { font-size: 1.5rem; font-weight: 700; color: #00ff88; }
+        .stat-label { font-size: 0.8rem; color: #888; text-transform: uppercase; }
+        main { display: grid; grid-template-columns: 1fr 350px; gap: 2rem; }
+        @media (max-width: 1000px) { main { grid-template-columns: 1fr; } }
+        .panel {
+            background: #12121a;
+            border: 1px solid #2a2a3a;
+            border-radius: 12px;
+            padding: 1.5rem;
+        }
+        .panel h2 { font-size: 1.1rem; margin-bottom: 1rem; color: #00d4ff; display: flex; align-items: center; gap: 0.5rem; }
+        .harness-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 1rem; }
+        .harness-card {
+            background: #0f0f17;
+            border: 1px solid #252535;
+            border-radius: 8px;
+            padding: 1rem;
+            transition: all 0.2s;
+        }
+        .harness-card:hover { border-color: #00ff88; transform: translateY(-2px); box-shadow: 0 4px 20px rgba(0,255,136,0.1); }
+        .harness-card.priority-1 { border-left: 3px solid #00ff88; }
+        .harness-card.priority-2 { border-left: 3px solid #00d4ff; }
+        .harness-card.failed { border-left: 3px solid #ff4444; opacity: 0.6; }
+        .harness-name { font-weight: 600; font-size: 1rem; margin-bottom: 0.25rem; }
+        .harness-meta { font-size: 0.75rem; color: #888; display: flex; gap: 0.75rem; flex-wrap: wrap; margin-bottom: 0.5rem; }
+        .harness-status { display: inline-block; padding: 0.15rem 0.5rem; border-radius: 4px; font-size: 0.7rem; font-weight: 600; text-transform: uppercase; }
+        .status-integrating { background: rgba(0,212,255,0.2); color: #00d4ff; }
+        .status-reviewed_extracted { background: rgba(0,255,136,0.2); color: #00ff88; }
+        .status-pending { background: rgba(255,200,0,0.2); color: #ffc800; }
+        .status-failed { background: rgba(255,68,68,0.2); color: #ff4444; }
+        .extractions { font-size: 0.75rem; color: #aaa; }
+        .category-bars { display: flex; gap: 2px; height: 6px; margin-top: 0.5rem;5rem; }
+        .cat-bar { flex: 1; background: #252535; border-radius: 1px; }
+        .cat-bar.filled { background: linear-gradient(90deg, #00ff88, #00d4ff); }
+        .sidebar { display: flex; flex-direction: column; gap: 1.5rem; }
+        .mesh-panel .peer { padding: 0.75rem; background: #0f0f17; border-radius: 6px; margin-bottom: 0.5rem; border: 1px solid #252535; }
+        .peer-name { font-weight: 600; color: #00ff88; }
+        .peer-meta { font-size: 0.75rem; color: #888; margin-top: 0.25rem; }
+        .peer-status { display: inline-block; width: 8px; height: 8px; border-radius: 50%; margin-right: 0.5rem; }
+        .status-online { background: #00ff88; }
+        .status-offline { background: #ff4444; }
+        .picks-panel .pick { display: flex; align-items: center; gap: 0.75rem; padding: 0.75rem; background: #0f0f17; border-radius: 6px; border: 1px solid #252535; }
+        .pick-number { width: 32px; height: 32px; background: linear-gradient(135deg, #00ff88, #00d4ff); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 700; color: #0a0a0f; }
+        .pick-info { flex: 1; }
+        .pick-name { font-weight: 600; }
+        .pick-desc { font-size: 0.75rem; color: #888; }
+        .empty-pick { opacity: 0.4; }
+        .footer { margin-top: 3rem; padding-top: 2rem; border-top: 1px solid #2a2a3a; text-align: center; color: #666; font-size: 0.85rem; }
+        .footer a { color: #00d4ff; text-decoration: none; }
+        .footer a:hover { text-decoration: underline; }
+        .pulse { animation: pulse 2s infinite; }
+        @keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.5; } }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>🏛 Harness Bulletin Board</h1>
+            <p class="subtitle">Inversion Labs — 20-Harness Fleet Coordination Hub</p>
+            <div class="status-bar" id="statusBar">
+                <div class="stat"><span class="stat-value" id="totalHarnesses">0</span><span class="stat-label">Total Harnesses</span></div>
+                <div class="stat"><span class="stat-value" id="integrated">0</span><span class="stat-label">Integrated</span></div>
+                <div class="stat"><span class="stat-value" id="totalExtractions">0</span><span class="stat-label">Extractions</span></div>
+                <div class="stat"><span class="stat-value" id="meshPeers">0</span><span class="stat-label">Mesh Peers</span></div>
+                <div class="stat"><span class="stat-value pulse" id="lastUpdate">—</span><span class="stat-label">Last Update</span></div>
+            </div>
+        </header>
+        <main>
+            <section class="panel">
+                <h2>📦 Harness Fleet</h2>
+                <div class="harness-grid" id="harnessGrid"></div>
+            </section>
+            <aside class="sidebar">
+                <section class="panel mesh-panel">
+                    <h2>🌐 Mesh Peers</h2>
+                    <div id="meshPeers"></div>
+                </section>
+                <section class="panel picks-panel">
+                    <h2>🎯 Captain's 5 Picks</h2>
+                    <div id="captainPicks"></div>
+                </section>
+            </aside>
+        </main>
+        <footer class="footer">
+            <p>Built by <strong>bioCAPT Mesh</strong> • Zero token cost • Captain: <strong>KnowUrKnot</strong></p>
+            <p>Repo: <a href="https://github.com/knowurknottty/harness-bulletin-board" target="_blank">github.com/knowurknottty/harness-bulletin-board</a> | Mesh: <a href="https://github.com/inversion-labs" target="_blank">theinversionlabs</a></p>
+            <p>Deadline: July 4, 2026 | Pipeline: REVIEW → EXTRACT → CUSTOMIZE → INTEGRATE → GATES → META-ARCH</p>
+        </footer>
+    </div>
+    <script>
+        async function loadData() {
+            try {
+                const [indexRes, meshRes] = await Promise.all([
+                    fetch('INDEX.json'),
+                    fetch('https://api.github.com/repos/knowurknottty/harness-bulletin-board/contents/harnesses?ref=main').catch(() => null)
+                ]);
+                
+                const index = await indexRes.json();
+                renderHarnesses(index.harnesses || {});
+                renderStatusBar(index);
+                renderCaptainPicks();
+                
+                // Mock mesh peers for now - would come from mesh bridge
+                renderMeshPeers([
+                    { name: "local-supercoder", role: "Captain Interface", status: "online", handle: "@biocapt_supercoder" },
+                    { name: "deepresearch", role: "Research Specialist", status: "online", handle: "@bioCAPTDeepResearch_bot" },
+                    { name: "beta-bot", role: "Supervisor", status: "online", handle: "@biocaptbetabot" },
+                    { name: "gcp-bot", role: "Public-Facing", status: "online", handle: "@biocaptbeta_gcp_bot" },
+                    { name: "slack-bridge", role: "Slack Relay", status: "online", handle: "slack-bridge" }
+                ]);
+            } catch (e) {
+                console.error('Failed to load data:', e);
+            }
+        }
+        
+        function renderHarnesses(harnesses) {
+            const grid = document.getElementById('harnessGrid');
+            const entries = Object.entries(harnesses).sort((a, b) => {
+                const statusOrder = { integrating: 0, reviewed_extracted: 1, customizing: 2, pending: 3, failed: 4 };
+                return (statusOrder[a[1].status] || 99) - (statusOrder[b[1].status] || 99);
+            });
+            
+            grid.innerHTML = entries.map(([key, data]) => {
+                const cats = data.categories || {};
+                const totalCats = Object.values(cats).filter(v => v > 0).length;
+                const catBars = Object.entries(cats).map(([cat, count]) => 
+                    `<div class="cat-bar ${count > 0 ? 'filled' : ''}" title="${cat}: ${count}"></div>`
+                ).join('');
+                
+                return `
+                    <div class="harness-card priority-${data.priority || 1} ${data.status === 'failed' ? 'failed' : ''}">
+                        <div class="harness-name">${key}</div>
+                        <div class="harness-meta">
+                            <span class="harness-status status-${data.status}">${(data.status || 'pending').replace('_', ' ')}</span>
+                            <span>📦 ${data.extractions || 0} extractions</span>
+                        </div>
+                        <div class="category-bars">${catBars}</div>
+                    </div>
+                `;
+            }).join('');
+        }
+        
+        function renderStatusBar(index) {
+            const harnesses = index.harnesses || {};
+            const integrated = Object.values(harnesses).filter(h => h.status === 'integrating').length;
+            const totalExtractions = Object.values(harnesses).reduce((sum, h) => sum + (h.extractions || 0), 0);
+            const lastUpdate = index.last_updated ? new Date(index.last_updated).toLocaleString() : '—';
+            
+            document.getElementById('totalHarnesses').textContent = Object.keys(harnesses).length;
+            document.getElementById('integrated').textContent = integrated;
+            document.getElementById('totalExtractions').textContent = totalExtractions;
+            document.getElementById('lastUpdate').textContent = lastUpdate;
+        }
+        
+        function renderMeshPeers(peers) {
+            const container = document.getElementById('meshPeers');
+            container.innerHTML = peers.map(peer => `
+                <div class="peer">
+                    <div class="peer-name">
+                        <span class="peer-status status-${peer.status}"></span>
+                        ${peer.name}
+                    </div>
+                    <div class="peer-meta">${peer.role} • ${peer.handle}</div>
+                </div>
+            `).join('');
+            document.getElementById('meshPeers').textContent = peers.length;
+        }
+        
+        function renderCaptainPicks() {
+            const container = document.getElementById('captainPicks');
+            const picks = [
+                { name: "Hermes", desc: "Local-first AI agent with skill system & MCP", filled: true },
+                { name: "SoulForge", desc: "Meta-prompt architecture for recursive improvement", filled: true },
+                { name: "OpenClaw", desc: "Desktop agent with plugin system & cognitive arch", filled: true },
+                { name: "Teleclaw", desc: "Telegram bot framework for AI deployment", filled: true },
+                { name: "Nanoclaw", desc: "Minimal WASM agent for edge deployment", filled: true },
+            ];
+            
+            container.innerHTML = picks.map((pick, i) => `
+                <div class="pick ${pick.filled ? '' : 'empty-pick'}">
+                    <div class="pick-number">${i + 1}</div>
+                    <div class="pick-info">
+                        <div class="pick-name">${pick.name}</div>
+                        <div class="pick-desc">${pick.desc}</div>
+                    </div>
+                </div>
+            `).join('');
+        }
+        
+        loadData();
+        // Refresh every 30 seconds
+        setInterval(loadData, 30000);
+    </script>
+</body>
+</html>
