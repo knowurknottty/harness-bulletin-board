@@ -1,0 +1,9 @@
+{
+  "harness": "cursor",
+  "source_file": "README.md",
+  "category": "platform_upgrades",
+  "relevance_score": 1,
+  "content_preview": "# Cursor\n\nCreating new posts on [our forum](https://forum.cursor.com/) for bugs or feature requests is much appreciated!\n\n## Getting Started\n\nHead over to [our website](https://cursor.com/) to download Cursor.\n\n## Features\n\n[See here](https://cursor.com/features) for more info on Cursor's features.\n\n## Resources\n\n- Download: https://cursor.com\n- Features: https://cursor.com/features\n- Community forum: https://forum.cursor.com/\n\n## Security\n\nPlease do not report security vulnerabilities through public issues. See [SECURITY.md](SECURITY.md) and email [security-reports@cursor.com](mailto:security-reports@cursor.com).\n",
+  "extracted_at": "2026-07-01T22:01:58.538800+00:00",
+  "size": 622
+}

@@ -1,0 +1,9 @@
+{
+  "harness": "kimi_cli",
+  "source_file": "web/index.html",
+  "category": "infra_upgrades",
+  "relevance_score": 1,
+  "content_preview": "<!doctype html>\n<html lang=\"en\">\n  <head>\n    <meta charset=\"UTF-8\" />\n    <link rel=\"icon\" type=\"image/svg+xml\" href=\"/logo.png\" />\n    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0, interactive-widget=resizes-content\" />\n    <title>Kimi Code Web UI</title>\n  </head>\n  <body>\n    <div id=\"root\"></div>\n    <script type=\"module\" src=\"/src/main.tsx\"></script>\n  </body>\n</html>\n",
+  "extracted_at": "2026-07-01T22:02:22.484611+00:00",
+  "size": 401
+}

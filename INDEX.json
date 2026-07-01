@@ -1,0 +1,117 @@
+{
+  "harnesses": {
+    "hermes": {
+      "status": "integrating",
+      "extractions": 70,
+      "categories": {
+        "memory_upgrades": 10,
+        "vision_upgrades": 10,
+        "research_upgrades": 10,
+        "codegen_upgrades": 10,
+        "infra_upgrades": 10,
+        "cognitive_upgrades": 10,
+        "platform_upgrades": 10
+      },
+      "updated": "2026-07-01T22:02:14.171589+00:00"
+    },
+    "codex": {
+      "status": "integrating",
+      "extractions": 70,
+      "categories": {
+        "memory_upgrades": 10,
+        "vision_upgrades": 10,
+        "research_upgrades": 10,
+        "codegen_upgrades": 10,
+        "infra_upgrades": 10,
+        "cognitive_upgrades": 10,
+        "platform_upgrades": 10
+      },
+      "updated": "2026-07-01T22:01:57.834546+00:00"
+    },
+    "cursor": {
+      "status": "integrating",
+      "extractions": 1,
+      "categories": {
+        "memory_upgrades": 0,
+        "vision_upgrades": 0,
+        "research_upgrades": 0,
+        "codegen_upgrades": 0,
+        "infra_upgrades": 0,
+        "cognitive_upgrades": 0,
+        "platform_upgrades": 1
+      },
+      "updated": "2026-07-01T22:01:58.539201+00:00"
+    },
+    "opencode": {
+      "status": "integrating",
+      "extractions": 66,
+      "categories": {
+        "memory_upgrades": 10,
+        "vision_upgrades": 10,
+        "research_upgrades": 10,
+        "codegen_upgrades": 10,
+        "infra_upgrades": 6,
+        "cognitive_upgrades": 10,
+        "platform_upgrades": 10
+      },
+      "updated": "2026-07-01T22:01:59.381427+00:00"
+    },
+    "cline": {
+      "status": "integrating",
+      "extractions": 70,
+      "categories": {
+        "memory_upgrades": 10,
+        "vision_upgrades": 10,
+        "research_upgrades": 10,
+        "codegen_upgrades": 10,
+        "infra_upgrades": 10,
+        "cognitive_upgrades": 10,
+        "platform_upgrades": 10
+      },
+      "updated": "2026-07-01T22:02:04.449393+00:00"
+    },
+    "gemini_cli": {
+      "status": "integrating",
+      "extractions": 70,
+      "categories": {
+        "memory_upgrades": 10,
+        "vision_upgrades": 10,
+        "research_upgrades": 10,
+        "codegen_upgrades": 10,
+        "infra_upgrades": 10,
+        "cognitive_upgrades": 10,
+        "platform_upgrades": 10
+      },
+      "updated": "2026-07-01T22:02:19.889421+00:00"
+    },
+    "kimi_cli": {
+      "status": "integrating",
+      "extractions": 70,
+      "categories": {
+        "memory_upgrades": 10,
+        "vision_upgrades": 10,
+        "research_upgrades": 10,
+        "codegen_upgrades": 10,
+        "infra_upgrades": 10,
+        "cognitive_upgrades": 10,
+        "platform_upgrades": 10
+      },
+      "updated": "2026-07-01T22:02:22.492996+00:00"
+    },
+    "zed": {
+      "status": "integrating",
+      "extractions": 70,
+      "categories": {
+        "memory_upgrades": 10,
+        "vision_upgrades": 10,
+        "research_upgrades": 10,
+        "codegen_upgrades": 10,
+        "infra_upgrades": 10,
+        "cognitive_upgrades": 10,
+        "platform_upgrades": 10
+      },
+      "updated": "2026-07-01T22:02:29.936076+00:00"
+    }
+  },
+  "last_updated": "2026-07-01T22:02:32.101000+00:00"
+}

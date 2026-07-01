@@ -1,0 +1,9 @@
+{
+  "harness": "opencode",
+  "source_file": "internal/llm/agent/tools.go",
+  "category": "memory_upgrades",
+  "relevance_score": 2,
+  "content_preview": "package agent\n\nimport (\n\t\"context\"\n\n\t\"github.com/opencode-ai/opencode/internal/history\"\n\t\"github.com/opencode-ai/opencode/internal/llm/tools\"\n\t\"github.com/opencode-ai/opencode/internal/lsp\"\n\t\"github.com/opencode-ai/opencode/internal/message\"\n\t\"github.com/opencode-ai/opencode/internal/permission\"\n\t\"github.com/opencode-ai/opencode/internal/session\"\n)\n\nfunc CoderAgentTools(\n\tpermissions permission.Service,\n\tsessions session.Service,\n\tmessages message.Service,\n\thistory history.Service,\n\tlspClients map[string]*lsp.Client,\n) []tools.BaseTool {\n\tctx := context.Background()\n\totherTools := GetMcpTools(ctx, permissions)\n\tif len(lspClients) > 0 {\n\t\totherTools = append(otherTools, tools.NewDiagnosticsTool(lspClients))\n\t}\n\treturn append(\n\t\t[]tools.BaseTool{\n\t\t\ttools.NewBashTool(permissions),\n\t\t\ttools.NewEditTool(lspClients, permissions, history),\n\t\t\ttools.NewFetchTool(permissions),\n\t\t\ttools.NewGlobTool(),\n\t\t\ttools.NewGrepTool(),\n\t\t\ttools.NewLsTool(),\n\t\t\ttools.NewSourcegraphTool(),\n\t\t\ttools.NewViewTool(lspClients),\n\t\t\ttools.NewPatchTool(lspClients, permissions, history),\n\t\t\ttools.NewWriteTool(lspClients, permissions, history),\n\t\t\tNewAgentTool(sessions, messages, lspClients),\n\t\t}, otherTools...,\n\t)\n}\n\nfunc TaskAgentTools(lspClients map[string]*lsp.Client) []tools.BaseTool {\n\treturn []tools.BaseTool{\n\t\ttools.NewGlobTool(),\n\t\ttools.NewGrepTool(),\n\t\ttools.NewLsTool(),\n\t\ttools.NewSourcegraphTool(),\n\t\ttools.NewViewTool(lspClients),\n\t}\n}\n",
+  "extracted_at": "2026-07-01T22:01:59.374861+00:00",
+  "size": 1441
+}

@@ -1,0 +1,9 @@
+{
+  "harness": "gemini_cli",
+  "source_file": "docs/tools/web-search.md",
+  "category": "research_upgrades",
+  "relevance_score": 3,
+  "content_preview": "# Web search tool (`google_web_search`)\n\nThe `google_web_search` tool allows the Gemini agent to retrieve up-to-date\ninformation, news, and facts from the internet via Google Search.\n\n## Technical reference\n\nThe agent uses this tool when your request requires knowledge of current events\nor specific online documentation not available in its internal training data.\n\n### Arguments\n\n- `query` (string, required): The search query to be executed.\n\n## Technical behavior\n\n- **Grounding:** Returns a generated summary based on search results.\n- **Citations:** Includes source URIs and titles for factual grounding.\n- **Processing:** The Gemini API processes the search results before returning a\n  synthesized response to the agent.\n\n## Use cases\n\n- Researching the latest version of a software library or API.\n- Finding solutions to recent software bugs or security vulnerabilities.\n- Retrieving news or documentation updated after the model's knowledge cutoff.\n\n## Next steps\n\n- Follow the [Web tools guide](../cli/tutorials/web-tools.md) for practical\n  usage examples.\n- Explore the [Web fetch tool reference](./web-fetch.md) for direct URL access.\n",
+  "extracted_at": "2026-07-01T22:02:19.615114+00:00",
+  "size": 1149
+}

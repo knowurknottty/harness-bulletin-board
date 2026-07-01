@@ -1,0 +1,9 @@
+{
+  "harness": "kimi_cli",
+  "source_file": "web/biome.jsonc",
+  "category": "research_upgrades",
+  "relevance_score": 2,
+  "content_preview": "{\n  \"$schema\": \"./node_modules/@biomejs/biome/configuration_schema.json\",\n  \"extends\": [\"ultracite/core\", \"ultracite/react\"],\n  \"files\": {\n    // external code\n    \"includes\": [\n      \"!src/components/ai-elements\",\n      \"!src/components/ui\",\n      \"!src/lib/api\",\n      \"!**/dist\",\n    ],\n  },\n  \"formatter\": {\n    // Disable Biome formatting while we continue using Prettier.\n    \"enabled\": false,\n  },\n  // TODO: some rules can be enabled later when the development is more mature\n  \"linter\": {\n    \"rules\": {\n      \"correctness\": {\n        // View Transitions API uses ::view-transition-old(root) which linter doesn't recognize\n        \"noUnknownTypeSelector\": \"off\",\n      },\n      \"suspicious\": {\n        // Middleware pattern often requires async without await\n        \"useAwait\": \"off\",\n      },\n      \"performance\": {},\n      \"complexity\": {\n        // TODO: refactor complex functions later\n        \"noExcessiveCognitiveComplexity\": \"off\",\n      },\n      \"nursery\": {\n        \"useSortedClasses\": \"off\",\n        \"noLeakedRender\": \"off\",\n      },\n      \"style\": \"off\",\n    },\n  },\n  \"assist\": {\n    \"enabled\": true,\n    \"actions\": {\n      \"source\": {\n        \"organizeImports\": \"off\",\n        \"useSortedAttributes\": \"off\",\n      },\n    },\n  },\n  \"overrides\": [\n    {\n      \"includes\": [\"src/lib/api/**/*\"],\n      \"linter\": {\n        \"enabled\": false,\n      },\n      \"formatter\": {\n        \"enabled\": false,\n      },\n    },\n    {\n      \"includes\": [\"biome.jsonc\", \"index.html\"],\n      \"formatter\": {\n        \"enabled\": false,\n      },\n    },\n  ],\n}\n",
+  "extracted_at": "2026-07-01T22:02:22.483982+00:00",
+  "size": 1556
+}

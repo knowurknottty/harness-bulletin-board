@@ -1,0 +1,9 @@
+{
+  "harness": "cline",
+  "source_file": "docs/provider-config/qwen.mdx",
+  "category": "vision_upgrades",
+  "relevance_score": 3,
+  "content_preview": "---\ntitle: \"Alibaba Qwen\"\ndescription: \"Learn how to configure and use Alibaba Cloud's Qwen provider with Cline.\"\n---\n\n**Website:** [https://bailian.console.aliyun.com/](https://bailian.console.aliyun.com/)\n\n### Get API Credentials\n\n1.  **Sign Up/Sign In:** Go to the [Alibaba Cloud Bailian Console](https://bailian.console.aliyun.com/). Create an account or sign in.\n2.  **Navigate to API Keys:** Access the API key management section.\n3.  **Create a Key:** Generate a new API key for your application.\n4.  **Copy the Key:** Copy the API key immediately and store it securely.\n\n### Configuration in Cline\n\n> See [Authorization & Model Selection](/getting-started/authorizing-with-cline#menu).\n\n1.  **Open Cline Settings:** Click the settings icon (\u2699\ufe0f) in the Cline panel.\n2.  **Select Provider:** Choose \"Alibaba Qwen\" from the \"API Provider\" dropdown.\n3.  **Select Region:** Choose \"International\" or \"China\" based on your location.\n4.  **Enter API Key:** Paste your Qwen API key into the \"Qwen API Key\" field.\n5.  **Select Provider Model:** Choose your desired model from the \"Model\" dropdown.\n\n### Tips and Notes\n\n-   **Vision Support:** VL (Vision-Language) models support image inputs for multimodal tasks.\n-   **Pricing:** Check the [Alibaba Cloud Bailian Console](https://bailian.console.aliyun.com/) for current pricing.\n",
+  "extracted_at": "2026-07-01T22:02:04.442100+00:00",
+  "size": 1330
+}
